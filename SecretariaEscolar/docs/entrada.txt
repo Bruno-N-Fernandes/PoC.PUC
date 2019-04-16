@@ -1,0 +1,19 @@
+3
+543 Historia
+658 Patricia
+2
+123 Maria
+222 Pedro
+234 Algebra
+741 Carla
+3
+123 Maria
+246 Joao
+369 Jose
+987 Portugues
+864 Silvia
+4
+246 Joao
+369 Jose
+222 Pedro
+741 Carla

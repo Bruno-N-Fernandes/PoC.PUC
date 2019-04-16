@@ -1,0 +1,71 @@
+Enunciado:
+
+Você deve implementar um aplicativo (com back-end em .NET e front-end em WinForms ou WPF) para gerenciamento da secretaria de uma escola.
+O desafio será desenvolver uma aplicação que possua três grandes funcionalidades:
+
+A) Ler arquivo de entrada (um arquivo texto chamado "entrada.txt") com a seguinte estrutura:
+
+1. A primeira linha do arquivo deverá conter um número inteiro "D" com a quantidade de disciplinas
+2. A partir da segunda linha do arquivo, o seguinte padrão se repetirá "D" vezes:
+2.1. Haverá uma linha com o código (inteiro) da disciplina, um espaço e o nome da disciplina
+2.2. Na linha seguinte haverá a matrícula (número inteiro) do(a) professor(a), um espaço e o nome do(a) professor(a) da disciplina
+2.3. A linha seguinte conterá um número inteiro "A" com a quantidade de alunos inscritos na disciplina
+2.4. As próximas "A" linhas seguirão o seguinte padrão: matrícula (número inteiro) do aluno, um espaço e o nome do(a) aluno(a).
+
+Exemplo de arquivo "entrada.txt":
+
+--- arquivo "entrada.txt" inicia na linha abaixo ---
+2
+11 Literatura
+44 Cosme
+3
+33 Ana
+22 Felipe
+55 Renata
+22 Geografia
+55 Renata
+2
+44 Cosme
+11 Marcos
+--- arquivo "entrada.txt" finaliza na linha acima ---
+
+Para o arquivo acima temos 2 disciplinas: Literatura, cujo professor é Cosme e possui 2 alunos inscritos (Ana e Felipe) e Geografia, cuja professora é Renata e possui apenas 1 aluno inscrito (Marcos).
+Os dados deverão ser mantidos em memória na aplicação.
+
+B) Gerar arquivo de saída (um arquivo texto de nome "saida.txt") com a seguinte estrutura:
+
+1. Lista de disciplinas (ordenadas pelo nome), contendo o nome da disciplina, um espaço e o nome do(a) professor(a)
+2. Lista de pessoas (ordenados pela matrícula), um espaço e a quantidade de disciplinas em que está inscrito(a)
+
+Exemplo de arquivo "saida.txt" gerado pelo arquivo "entrada.txt" do exemplo acima:
+
+--- arquivo "saida.txt" inicia na linha abaixo ---
+Geografia Renata
+Literatura Cosme
+Marcos 1
+Felipe 1
+Ana 1
+Cosme 1
+Renata 1
+--- arquivo "saida.txt" finaliza na linha acima ---
+
+C) Fornecer uma interface visual para que o usuário possa acessar as seguintes funcionalidades:
+
+1. Lista de disciplinas, podendo editar o nome e o(a) professor(a), além de visualizar os(as) alunos(as) inscritos(as)
+2. Lista de alunos(as), podendo editar o nome e visualizar as disciplinas em que estão inscritos
+
+As escolhas arquiteturais, utilização correta dos conceitos de orientação a objetos, definição de estruturas de dados, escolhas referentes ao aspecto visual, padrões de projeto, testes unitários, modularização e organização geral do código-fonte (nomes de variáveis e classes, identação etc.) serão levados em consideração na avaliação.
+
+ATENÇÃO: é possível que algum elemento não tenha sido especificado. Utilize sua criatividade e bom senso para desenvolver uma solução (e explique essas escolhas).
+
+Você deverá enviar um arquivo ZIP contendo (não publique no Github ou qualquer outra plataforma!):
+
+- leiame.txt (descrição da solução e como utilizá-la)
+- entrada.txt
+- saida.txt
+- src (pasta com o código fonte-do projeto -- SEM ARQUIVOS BINÁRIOS!!!)
+- docs (opcional)
+
+Obs.: não utilize banco de dados externo. Todos os dados devem ser mantidos em memória.
+
+Boa sorte!
