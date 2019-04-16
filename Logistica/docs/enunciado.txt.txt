@@ -1,0 +1,325 @@
+Controle de Combustível
+
+Você deve implementar um aplicativo para gerenciamento de combustível de uma empresa de logística.
+O desafio será desenvolver uma aplicação que possua duas funcionalidades:
+
+A) Ler um arquivo de entrada que descreve um relatório de automóveis e rotas agendadas, e calcular a média de consumo de combustível
+de cada automóvel para cada dia.
+
+Um exemplo de relatório de rotas agendadas e os veículos disponíveis seria:
+
++----------------------------+
+| CARRO A: consumo 7 km/l   |
+| CARRO B: consumo 8 km/l   |
+| CARRO C: consumo 10 km/l   |
++----------------------------+
+
++-------------+
+| ROTA DIA 1  |
++-------------+
+CARRO A: 35 km CIDADE A, 80 km CIDADE B, 22 km VOLTAR
+CARRO B: 70 km CIDADE C, 200 km CIDADE D, 320 km VOLTAR
+CARRO C: 12 km CIDADE E, 60 km CIDADE F, 85 km CIDADE G, 50 km VOLTAR
+
++-------------+
+| ROTA DIA 2  |
++-------------+
+CARRO A: 32 km CIDADE AB, 32 km VOLTAR
+CARRO B: 35 km CIDADE A, 64 km CIDADE DB, 20 km VOLTAR
+CARRO C: 62 km CIDADE EB, 45 km CIDADE FB, 120 km VOLTAR
+
++-------------+
+| ROTA DIA 3  |
++-------------+
+CARRO A: 28 km CIDADE BA, 28 km VOLTAR
+CARRO B: 27 km CIDADE BB, 35 km CIDADE BC, 20 km CIDADE BD, 5 km VOLTAR
+CARRO C: 180 km CIDADE BE, 60 km CIDADE BF, 50 km VOLTAR
+
+o que significa que no dia 1 o carro "A" sai da garagem, anda 35 kilômetros até a cidade A,
+ depois anda 80 kilômetros até a cidade B  e, finalmente, anda 22 kilômetros para retornar à garagem.
+ 
+Não existem trechos com kilometragem 0 (ZERO)
+
+Cada dia temos UMA e apenas UMA rota para cada CARRO
+
+
+O relatório seria descrito no arquivo texto arquivo entrada_func_a.txt:
+
+1.    A primeira linha possui um número inteiro "S" com a quantidade de veículos
+2.    A partir da segunda linha do arquivo, o seguinte padrão se repetirá "S" vezes:
+2.1   Haverá uma linha com um número inteiro "C", um espaço e um número inteiro com o consumo médio do carro (km/l)
+3     Uma linha em branco para determinar o fim do bloco
+4     Uma  nova linha com um número inteiro "D" com a quantidade de dias do relatorio
+5.    A partir da proxima linha do arquivo, o seguinte padrão se repetirá "D" vezes:
+5.1   Uma linha com um inteiro "C" referente ao código do veículo do item 2.1
+5.2   Uma linha com um número inteiro "N" com o número de rotas 
+5.3   Um padrão se repetirá "N" vezes
+5.3.1 Um número inteiro com o código da cidade, seguido de um espaço em branco e um número inteiro com a kilometragem a partir do ponto anterior
+5.4   Uma linha em branco para determinar o fim do bloco
+
+O Código 0 de cidade indica a "Garagem" 
+
+exemplo de arquivo entrada_func_a.txt para o relatorio anterior:
+
+--- arquivo "entrada_func_a.txt" inicia na linha abaixo ---
+3
+1 7
+2 8
+3 10
+
+3
+1
+3
+100 35
+125 80
+0 22
+
+2
+3
+123 70
+100 200
+0 320
+
+3
+4
+126 12
+253 60
+222 85
+0 50
+
+1
+2
+300 32
+0 32
+
+2
+3
+301 35
+305 64
+0 20
+
+3
+3
+307 62
+345 45
+0 120
+
+1
+2
+400 28
+0 28
+
+2
+4
+401 27
+405 35
+407 20
+0 5
+
+
+3
+3
+307 180
+345 60
+0 50
+
+--- arquivo "entrada_func_a.txt" finaliza na linha acima ---
+
+Como calcular a média de consumo  total de um veículo "X" num "dia" (MEDIA_CARRO_X_NO DIA_Z ):
+
+
+MEDIA_CARRO_X_TRECHO_J = KILOMETRAGEM_TRECHO_PRA_CIDADE_J / CONSUMO_CARRO_X
+
+MEDIA_CARRO_X_NO DIA_Z =  MEDIA_CARRO_X_TRECHO_PRA_CIDADE_A + MEDIA_CARRO_X_TRECHO_PRA_CIDADE_B + ... + MEDIA_CARRO_X_TRECHO_PRA_CIDADE_N + MEDIA_CARRO_X_TRECHO_VOLTA
+
+Seguindo o exemplo do relatório:
+
+media do carro A, no dia 1, trecho até CIDADE A = 35 km / 7 km/l = 5 litros
+media do carro A, no dia 1, trecho até CIDADE B = 80 km / 7 km/l = 11.42857 litros
+media do carro A, no dia 1, trecho de VOLTA = 22 km / 7 km/l = 3.142857 litros
+
+media do carro A no dia 1 = 5 + 11.42857 + 3.142857 = 19,57142857
+
+Deve-se calcular as médias de consumo para cada veículo , em cada dia.
+
+E, como saída, gerar o arquivo "saida_func_A.txt"
+
+o arquivo de saída terá então o seguinte formato:
+
+1.    A primeira linha possui um número inteiro "D" com a quantidade de dias do relatorio
+2.    A partir da segunda linha do arquivo, o seguinte padrão se repetirá "D" vezes:
+2.1   Um número inteiro com o código do veículo (do arquivo de entrada), seguido de um espaço em branco e um número
+      fracionário, com 2 casas decimais, com a média do consumo total do veículo no dia.
+2.3   Uma linha em branco para determinar o fim do bloco
+
+exemplo de arquivo "saida_func_A.txt":
+
+--- arquivo "saida_func_A.txt" inicia na linha abaixo ---
+2
+1 19.57
+2 73.75
+3 20.70
+
+1 9.14
+2 14.87
+3 22.70
+
+1 8.00
+2 10.87
+3 29.00
+
+--- arquivo "saida_func_A.txt" finaliza na linha acima ---
+
+o nome do arquivo de saída deverá ser: "saida_func_A.txt"
+
+B) Ler um arquivo de entrada que descreve um relatório de automóveis e rotas agendadas, com a quantidade de combustível disponível
+e gerar um arquivo de saída com o restante de combustível ao final de cada dia.
+
+seria o mesmo relatório de entrada, mais uma quantidade de combustivel disponível:
+
++----------------------------+
+| CARRO A: consumo 7 km/l   |
+| CARRO B: consumo 8 km/l   |
+| CARRO C: consumo 10 km/l   |
++----------------------------+
+
++-------------+
+| ROTA DIA 1  |
++-------------+
+CARRO A: 35 km CIDADE A, 80 km CIDADE B, 22 km VOLTAR
+CARRO B: 70 km CIDADE C, 200 km CIDADE D, 320 km VOLTAR
+CARRO C: 12 km CIDADE E, 60 km CIDADE F, 85 km CIDADE G, 50 km VOLTAR
+
++-------------+
+| ROTA DIA 2  |
++-------------+
+CARRO A: 32 km CIDADE AB, 32 km VOLTAR
+CARRO B: 35 km CIDADE A, 64 km CIDADE DB, 20 km VOLTAR
+CARRO C: 62 km CIDADE EB, 45 km CIDADE FB, 120 km VOLTAR
+
++-------------+
+| ROTA DIA 3  |
++-------------+
+CARRO A: 28 km CIDADE BA, 28 km VOLTAR
+CARRO B: 27 km CIDADE BB, 35 km CIDADE BC, 20 km CIDADE BD, 5 km VOLTAR
+CARRO C: 180 km CIDADE BE, 60 km CIDADE BF, 50 km VOLTAR
+
+COMBUSTÍVEL DISPONíVEL: 50 litros
+
+O relatório seria descrito no arquivo texto arquivo entrada_func_a.txt:
+
+1.    A primeira linha possui um número inteiro "S" com a quantidade de veículos
+2.    A partir da segunda linha do arquivo, o seguinte padrão se repetirá "S" vezes:
+2.1   Haverá uma linha com um número inteiro "C", um espaço e um número inteiro com o consumo médio do carro (km/l)
+3     Uma linha em branco para determinar o fim do bloco
+4     Uma  nova linha com um número inteiro "D" com a quantidade de dias do relatorio
+5.    A partir da proxima linha do arquivo, o seguinte padrão se repetirá "D" vezes:
+5.1   Uma linha com um inteiro "C" referente ao código do veículo do item 2.1
+5.2   Uma linha com um número inteiro "N" com o número de rotas 
+5.3   Um padrão se repetirá "N" vezes
+5.3.1 Um número inteiro com o código da cidade, seguido de um espaço em branco e um número inteiro com a kilometragem a partir do ponto anterior
+5.4   Uma linha em branco para determinar o fim do bloco
+6     Um número inteiro E com a quantidade de litros disponíveis  
+
+O Código 0 de cidade indica a "Garagem" 
+
+exemplo de arquivo entrada_func_a.txt para o relatorio anterior:
+
+--- arquivo "entrada_func_a.txt" inicia na linha abaixo ---
+3
+1 7
+2 8
+3 10
+
+3
+1
+3
+100 35
+125 80
+0 22
+
+2
+3
+123 70
+100 200
+0 320
+
+3
+4
+126 12
+253 60
+222 85
+0 50
+
+1
+2
+300 32
+0 32
+
+2
+3
+301 35
+305 64
+0 20
+
+3
+3
+307 62
+345 45
+0 120
+
+1
+2
+400 28
+0 28
+
+2
+4
+401 27
+405 35
+407 20
+0 5
+
+
+3
+3
+307 180
+345 60
+0 50
+
+170
+--- arquivo "entrada_func_a.txt" finaliza na linha acima ---
+
+
+a saida seria um arquivo com a lista por dia com a quantidade restante de combustivel ao final de cada dia
+ou se não há mais combustível suficiente no para cumprir as rotas do dia.
+
+combustivel restante ao final do dia = combustivel restante no dia anterior - consumo de combustível do dia 
+
+ex:
+
+COMBUSTÍVEL DISPONíVEL após as entregas: 0 l
+
+ROTA DIA 1: COMBUSTIVEL RESTANTE: 55.98 litros
+ROTA DIA 2: COMBUSTIVEL RESTANTE: 9.26 litros
+ROTA DIA 3: SEM COMBUSTÌVEL SUFICIENTE
+
+o arquivo de saída terá então o seguinte formato:
+
+1. A primeira linha possui um número inteiro "D" com a quantidade de litros disponiveis no estoque ao final das entregas
+2. Uma linha em branco para separar o bloco
+3. Uma linha possui um número inteiro "D" com a quantidade de dias do relatorio
+2. Nas próximas linhas, o seguinte padrão se repetirá "D" vezes:
+2.1 um numero decimal, com 2 casas fracionárias, com a quantidade de combustivel restante ao final do dia ou 0 (zero) se o combustível restante não dá para cumprir a rota do dia
+2.2 uma linha em branco definindo o fim do bloco
+
+exemplo de arquivo "saida_func_b.txt":
+
+--- arquivo "saida_func_b.txt" inicia na linha abaixo ---
+0
+
+55.98
+9.26
+0
+
+--- arquivo "saida_func_b.txt" finaliza na linha acima ---
