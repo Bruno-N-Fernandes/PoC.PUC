@@ -9,7 +9,7 @@ namespace PUC.Desafio.Logistica.Domain.ExtensionMethod
 	{
 		public static string NomeDoArquivoDeSaidaFuncATxt = "saida_func_a.txt";
 		public static string NomeDoArquivoDeSaidaFuncBTxt = "saida_func_b.txt";
-		public static string CaminhoLocal = $"{AppDomain.CurrentDomain.BaseDirectory}/Arquivos";
+		public static string CaminhoLocal = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Docs");
 		public static string CaminhoArquivoDeSaidaA = Path.Combine(CaminhoLocal, NomeDoArquivoDeSaidaFuncATxt);
 		public static string CaminhoArquivoDeSaidaB = Path.Combine(CaminhoLocal, NomeDoArquivoDeSaidaFuncBTxt);
 

@@ -17,7 +17,7 @@ namespace PUC.Desafio.Logistica.Domain.Entity
 		public LogisticaTransporte(LeitorDeLinhas leitorDeLinhas)
 		{
 			var qtdCarros = leitorDeLinhas.LerLinha();
-			for (int i = 0; i < qtdCarros; i++)
+			for (var i = 0; i < qtdCarros; i++)
 			{
 				var veiculo = new Veiculo(leitorDeLinhas);
 				Veiculos.Add(veiculo);
@@ -25,7 +25,7 @@ namespace PUC.Desafio.Logistica.Domain.Entity
 			leitorDeLinhas.PularLinha();
 
 			var qtdDias = leitorDeLinhas.LerLinha();
-			for (int i = 0; i < qtdDias; i++)
+			for (var i = 0; i < qtdDias; i++)
 			{
 				var diaria = new Diaria(Veiculos, leitorDeLinhas);
 				Diarias.Add(diaria);

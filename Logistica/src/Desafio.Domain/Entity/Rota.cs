@@ -14,7 +14,7 @@ namespace PUC.Desafio.Logistica.Domain.Entity
 		{
 			Veiculo = veiculo;
 			var qtdTrechos = leitorDeLinhas.LerLinha();
-			for (int i = 0; i < qtdTrechos; i++)
+			for (var i = 0; i < qtdTrechos; i++)
 			{
 				var trecho = new Trecho(this, leitorDeLinhas);
 				Trechos.Add(trecho);

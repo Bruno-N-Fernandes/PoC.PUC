@@ -13,7 +13,7 @@ namespace Desafio.Test
 		[TestMethod]
 		public void DeveObterArquivoDeEntradaA()
 		{
-			var entrada_func_a = ArquivoExtension.ObterArquivoEntrada("entrada_func_a.txt");
+			var entrada_func_a = ArquivoExtension.ObterArquivoEntrada(@"..\..\Docs\entrada_func_a.txt");
 
 			Assert.IsTrue(entrada_func_a.Count() > 0);
 		}
@@ -21,7 +21,7 @@ namespace Desafio.Test
 		[TestMethod]
 		public void DeveObterArquivoDeEntradaB()
 		{
-			var entrada_func_b = ArquivoExtension.ObterArquivoEntrada("entrada_func_b.txt");
+			var entrada_func_b = ArquivoExtension.ObterArquivoEntrada(@"..\..\Docs\entrada_func_b.txt");
 
 			Assert.IsTrue(entrada_func_b.Count() > 0);
 		}
@@ -29,11 +29,11 @@ namespace Desafio.Test
 		[TestMethod]
 		public void DeveObterOsVeiculos()
 		{
-			var entrada_func_a = ArquivoExtension.ObterArquivoEntrada("entrada_func_a.txt");
+			var entrada_func_a = ArquivoExtension.ObterArquivoEntrada(@"..\..\Docs\entrada_func_a.txt");
 			var leitorDeLinhasA = new LeitorDeLinhas(entrada_func_a);
 			var veiculos = new List<Veiculo>();
-			int qtdVeiculos = leitorDeLinhasA.LerLinha();
-			for (int i = 0; i < qtdVeiculos; i++)
+			var qtdVeiculos = leitorDeLinhasA.LerLinha();
+			for (var i = 0; i < qtdVeiculos; i++)
 				veiculos.Add(new Veiculo(leitorDeLinhasA));
 
 			Assert.IsTrue(veiculos.Any());
