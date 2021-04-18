@@ -23,6 +23,12 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Dominios
 			Nome = nome;
 		}
 
+		public void InscreverAluno(IEnumerable<Aluno> alunos)
+		{
+			foreach (var aluno in alunos)
+				InscreverAluno(aluno);
+		}
+
 		public void InscreverAluno(Aluno aluno)
 		{
 			if (!Alunos.Any(a => a.Matricula == aluno.Matricula))

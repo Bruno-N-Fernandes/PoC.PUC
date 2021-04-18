@@ -2,6 +2,6 @@
 {
 	public interface IPessoaWrapper
 	{
-		Pessoa Pessoa { set; }
+		Pessoa Pessoa { get; set; }
 	}
 }

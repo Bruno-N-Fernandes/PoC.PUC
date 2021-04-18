@@ -29,7 +29,7 @@ namespace PUC.Desafio.SecretariaEscolar.WinApp
 
 		private void btnAbrir_Click(object sender, EventArgs e)
 		{
-			if (String.IsNullOrWhiteSpace(txtLocalArquivo.Text))
+			if (string.IsNullOrWhiteSpace(txtLocalArquivo.Text))
 				MessageBox.Show("Selecione um arquivo antes de abri-lo!");
 			else
 			{
@@ -41,20 +41,20 @@ namespace PUC.Desafio.SecretariaEscolar.WinApp
 
 		private void RefreshGrids()
 		{
-			var alunos = _secretaria.ObterAlunos().Count();
-			var disciplinas = _secretaria.ObterDisciplinas().Count();
-			var pessoas = _secretaria.ObterPessoas().Count();
-			var professores = _secretaria.ObterProfessores().Count();
-			btnAlunos.Text = $"{alunos} Alunos";
-			btnDisciplinas.Text = $"{disciplinas} Disciplinas";
-			btnPessoas.Text = $"{pessoas} Pessoas";
-			btnProfessores.Text = $"{professores} Professores";
+			var alunos = _secretaria.ObterAlunos().OrderBy(a => a.Matricula).ToArray();
+			var disciplinas = _secretaria.ObterDisciplinas().OrderBy(a => a.Codigo).ToArray();
+			var pessoas = _secretaria.ObterPessoas().OrderBy(a => a.Matricula).ToArray();
+			var professores = _secretaria.ObterProfessores().OrderBy(a => a.Matricula).ToArray();
 
+			dgvAlunos.DataSource = alunos;
+			dgvDisciplinas.DataSource = disciplinas;
+			dgvPessoas.DataSource = pessoas;
+			dgvProfessores.DataSource = professores;
 
-			dgvAlunos.DataSource = _secretaria.ObterAlunos().OrderBy(a => a.Matricula).ToArray();
-			dgvDisciplinas.DataSource = _secretaria.ObterDisciplinas().OrderBy(a => a.Codigo).ToArray();
-			dgvPessoas.DataSource = _secretaria.ObterPessoas().OrderBy(a => a.Matricula).ToArray();
-			dgvProfessores.DataSource = _secretaria.ObterProfessores().OrderBy(a => a.Matricula).ToArray();
+			btnAlunos.Text = $"{alunos.Count()} Alunos";
+			btnDisciplinas.Text = $"{disciplinas.Count()} Disciplinas";
+			btnPessoas.Text = $"{pessoas.Count()} Pessoas";
+			btnProfessores.Text = $"{professores.Count()} Professores";
 		}
 	}
 }

@@ -94,10 +94,10 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Testes.Dominios
 		public void QuandoSolicitaCadastrarMatriculaExistente_DeveManterAListaInalterada()
 		{
 			var secretaria = new Core.Dominios.Secretaria();
-			var pessoa1 = new Pessoa(1, "Pessoa 1");
-			var pessoa2 = new Pessoa(2, "Pessoa 2");
-			var pessoa3 = new Pessoa(3, "Pessoa 3");
-			var pessoa4 = new Pessoa(4, "Pessoa 4");
+			var pessoa1 = new Aluno(new Pessoa(1, "Pessoa 1"));
+			var pessoa2 = new Aluno(new Pessoa(2, "Pessoa 2"));
+			var pessoa3 = new Aluno(new Pessoa(3, "Pessoa 3"));
+			var pessoa4 = new Aluno(new Pessoa(4, "Pessoa 4"));
 
 			secretaria.Matricular(pessoa1);
 			secretaria.Matricular(pessoa1);
@@ -113,8 +113,8 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Testes.Dominios
 		{
 			var secretaria = new Core.Dominios.Secretaria();
 
-			secretaria.Matricular(new Pessoa(1, "Pessoa 1"));
-			secretaria.Matricular(new Pessoa(2, "Pessoa 2"));
+			secretaria.Matricular(new Aluno(new Pessoa(1, "Pessoa 1")));
+			secretaria.Matricular(new Aluno(new Pessoa(2, "Pessoa 2")));
 
 			var pessoa = secretaria.ObterPessoaPorMatricula(2);
 			Assert.AreEqual(2, pessoa.Matricula);
@@ -123,9 +123,9 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Testes.Dominios
 		[TestMethod]
 		public void QuandoSecretariaMatricularUmaPessoa_AListaDePessoaDeveSerAumentada()
 		{
-			var secretaria = new Core.Dominios.Secretaria();
+			var secretaria = new Secretaria();
 
-			secretaria.Matricular(new Pessoa(1, "João da Silva"));
+			secretaria.Matricular(new Aluno(new Pessoa(1, "João da Silva")));
 
 			Assert.AreEqual(1, secretaria.ObterPessoas().Count());
 		}
@@ -153,18 +153,15 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Testes.Dominios
 			Assert.AreEqual(arquivoSaida2, arquivo);
 		}
 
-
-
 		private static Secretaria ObterSecretariaPreenchidaCom(Int32 quantidade)
 		{
 			var secretaria = new Core.Dominios.Secretaria();
 			for (var i = 0; i < quantidade; i++)
 			{
 				var disciplina = new Disciplina(i, $"Disciplina {i}");
-				secretaria.CriarDisciplina(disciplina);
+				secretaria.AdicionarDisciplina(disciplina);
 
 				var pessoa = new Pessoa(i, $"Aluno {i}");
-				secretaria.Matricular(pessoa);
 
 				var aluno = new Aluno(new Pessoa(i, $"Aluno {i}"));
 				secretaria.Matricular(aluno);

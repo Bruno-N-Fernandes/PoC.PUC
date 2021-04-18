@@ -9,7 +9,7 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Dominios
 	/// </summary>
 	public abstract class PessoaWrapper : IPessoaWrapper
 	{
-		Pessoa IPessoaWrapper.Pessoa { set => Pessoa = value; }
+		Pessoa IPessoaWrapper.Pessoa { get => Pessoa; set => Pessoa = value; }
 		protected Pessoa Pessoa { get; private set; }
 		protected List<Disciplina> Disciplinas { get; private set; }
 
