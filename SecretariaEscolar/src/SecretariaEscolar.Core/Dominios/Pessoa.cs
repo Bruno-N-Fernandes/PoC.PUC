@@ -8,8 +8,8 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Dominios
 	{
 		private List<PessoaWrapper> Papeis { get; set; }
 		public TipoPessoa TipoPessoa { get; private set; }
-		public Int32 Matricula { get; private set; }
-		public String Nome { get; private set; }
+		public int Matricula { get; private set; }
+		public string Nome { get; private set; }
 
 		public Pessoa(Int32 matricula, String nome)
 		{
@@ -23,7 +23,7 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Dominios
 			Nome = nome;
 		}
 
-		public TPessoaWrapper TransformarEm<TPessoaWrapper>() where TPessoaWrapper : PessoaWrapper, IPessoaWrapper, new()
+		public TPessoaWrapper TransformarEm<TPessoaWrapper>() where TPessoaWrapper : PessoaWrapper, new()
 		{
 			var pessoaWrapper = new TPessoaWrapper { Pessoa = this };
 			Papeis.Add(pessoaWrapper);

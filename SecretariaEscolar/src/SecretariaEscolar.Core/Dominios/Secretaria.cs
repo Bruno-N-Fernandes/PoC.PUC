@@ -14,7 +14,7 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Dominios
 		public IEnumerable<Professor> ObterProfessores() => Professores;
 		public IEnumerable<Disciplina> ObterDisciplinas() => Disciplinas;
 
-		public IEnumerable<Pessoa> ObterPessoas() => Alunos.OfType<IPessoaWrapper>().Select(a => a.Pessoa).Union(Professores.OfType<IPessoaWrapper>().Select(p => p.Pessoa));
+		public IEnumerable<Pessoa> ObterPessoas() => Alunos.Select(a => a.Pessoa).Union(Professores.Select(p => p.Pessoa));
 		public Pessoa ObterPessoaPorMatricula(Int32 matricula) => ObterPessoas().SingleOrDefault(p => p.Matricula == matricula);
 
 		public Aluno ObterAlunoPorMatricula(Int32 matricula) => Alunos.SingleOrDefault(a => a.Matricula == matricula);

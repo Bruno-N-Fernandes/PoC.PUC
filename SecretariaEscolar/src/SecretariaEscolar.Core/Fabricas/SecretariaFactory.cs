@@ -16,44 +16,49 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Fabricas
 
 		public static Secretaria CriarPorConteudo(String conteudo)
 		{
-			var secretaria = new Secretaria();
 			var leitor = new Leitor(conteudo);
+			return CriarPorLeitor(leitor);
+		}
 
-			CriarDisciplinas(secretaria, leitor);
+		private static Secretaria CriarPorLeitor(Leitor leitor)
+		{
+			var secretaria = new Secretaria();
+
+			CriarDisciplinas(leitor, secretaria);
 
 			return secretaria;
 		}
 
-		private static void CriarDisciplinas(Secretaria secretaria, Leitor leitor)
+		private static void CriarDisciplinas(Leitor leitor, Secretaria secretaria)
 		{
 			var quantidadeDeDisciplinas = leitor.LerInteiro();
 			for (var i = 0; i < quantidadeDeDisciplinas; i++)
 			{
-				var disciplina = CriarDisciplina(secretaria, leitor);
+				var disciplina = CriarDisciplina(leitor);
+				secretaria.AdicionarDisciplina(disciplina);
 
-				var professor = CriarProfessor(secretaria, leitor);
+				var professor = CriarProfessor(leitor, secretaria);
 				disciplina.DefinirTitular(professor);
 
-				var alunos = CriarAlunos(secretaria, leitor);
+				var alunos = CriarAlunos(leitor, secretaria);
 				disciplina.InscreverAluno(alunos);
 			}
 		}
 
-		private static Disciplina CriarDisciplina(Secretaria secretaria, Leitor leitor)
+		private static Disciplina CriarDisciplina(Leitor leitor)
 		{
 			var linha = leitor.LerString().SplitFields();
 			var disciplina = new Disciplina(linha.Codigo, linha.Descricao);
-			secretaria.AdicionarDisciplina(disciplina);
 			return disciplina;
 		}
 
-		private static Professor CriarProfessor(Secretaria secretaria, Leitor leitor)
+		private static Professor CriarProfessor(Leitor leitor, Secretaria secretaria)
 		{
 			var linha = leitor.LerString().SplitFields();
 			var professor = secretaria.ObterProfessorPorMatricula(linha.Codigo);
 			if (professor == null)
 			{
-				var pessoa = ObterPessoa(secretaria, linha.Codigo, linha.Descricao);
+				var pessoa = ObterPessoa(linha.Codigo, linha.Descricao, secretaria);
 				professor = pessoa.TransformarEm<Professor>();
 				secretaria.Matricular(professor);
 			}
@@ -61,32 +66,32 @@ namespace PUC.Desafio.SecretariaEscolar.Core.Fabricas
 			return professor;
 		}
 
-		private static IEnumerable<Aluno> CriarAlunos(Secretaria secretaria, Leitor leitor)
+		private static IEnumerable<Aluno> CriarAlunos(Leitor leitor, Secretaria secretaria)
 		{
 			var alunos = new List<Aluno>();
 			var quantidadeAlunos = leitor.LerInteiro();
 			for (var i = 0; i < quantidadeAlunos; i++)
 			{
-				var aluno = CriarAluno(secretaria, leitor);
+				var aluno = CriarAluno(leitor, secretaria);
 				alunos.Add(aluno);
 			}
 			return alunos;
 		}
 
-		private static Aluno CriarAluno(Secretaria secretaria, Leitor leitor)
+		private static Aluno CriarAluno(Leitor leitor, Secretaria secretaria)
 		{
 			var linha = leitor.LerString().SplitFields();
 			var aluno = secretaria.ObterAlunoPorMatricula(linha.Codigo);
 			if (aluno == null)
 			{
-				var pessoa = ObterPessoa(secretaria, linha.Codigo, linha.Descricao);
+				var pessoa = ObterPessoa(linha.Codigo, linha.Descricao, secretaria);
 				aluno = pessoa.TransformarEm<Aluno>();
 				secretaria.Matricular(aluno);
 			}
 			return aluno;
 		}
 
-		private static Pessoa ObterPessoa(Secretaria secretaria, Int32 matricula, String nome)
+		private static Pessoa ObterPessoa(int matricula, string nome, Secretaria secretaria)
 		{
 			var pessoa = secretaria.ObterPessoaPorMatricula(matricula);
 
